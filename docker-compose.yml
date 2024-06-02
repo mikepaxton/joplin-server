@@ -1,0 +1,33 @@
+services:
+  joplin-server:
+    image: etechonomy/joplin-server:latest
+    container_name: joplin-server
+    environment:
+        - APP_BASE_URL=http://localhost.local
+        - APP_PORT=22300
+        - APP_NAME=Joplin-Server
+        - NTP_SERVER=${NTP_SERVER_IP}  # Add Local NTP Server as it seems Joplin won't boot correctly with no internet connection
+        - MAX_TIME_DRIFT=5000
+        - DB_CLIENT=pg
+        - NODE_ENV=production
+        - MAILER_HOST=smtp.gmail.com
+        - MAILER_PORT=587
+        - MAILER_SECURITY=starttls
+        - MAILER_AUTH_USER=${MAILER_AUTH_USER}
+        - MAILER_ENABLED=1
+        - MAILER_NOREPLY_NAME=joplin server
+        - MAILER_NOREPLY_EMAIL=${MAILER_NOREPLY_EMAIL}
+        - MAILER_AUTH_PASSWORD=${MAILER_AUTH_PASSWORD}
+        - DB_CLIENT=pg
+        - POSTGRES_CONNECTION_STRING=postgresql://joplin:${DB_PASSWORD}@${POSTGRES_IP}:5432/joplin
+    restart: unless-stopped
+    ports:
+      - 22300:22300
+    networks:
+      - postgres_network
+
+networks:
+  postgres_network:
+    name: postgres_network
+    driver: bridge
+
