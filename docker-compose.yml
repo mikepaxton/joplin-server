@@ -3,10 +3,10 @@ services:
     image: etechonomy/joplin-server:latest
     container_name: joplin-server
     environment:
-        - APP_BASE_URL=http://localhost.local
+        - APP_BASE_URL=http://localhost:22300
         - APP_PORT=22300
         - APP_NAME=Joplin-Server
-        - NTP_SERVER=${NTP_SERVER_IP}  # Add Local NTP Server as it seems Joplin won't boot correctly with no internet connection
+        - NTP_SERVER=${NTP_SERVER_IP}:123  # Add Local NTP Server as it seems Joplin won't boot correctly with no internet connection
         - MAX_TIME_DRIFT=5000
         - DB_CLIENT=pg
         - NODE_ENV=production
