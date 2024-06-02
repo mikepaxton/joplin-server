@@ -91,7 +91,7 @@ After setting up the database, you can start the Joplin-Server using Docker Comp
 
 1. Navigate to the directory containing your `docker-compose.yml` and `.env` files.
 2. Run the following command to start the services:
-   ```sh
+```sh
    docker-compose up -d
 ```
 
